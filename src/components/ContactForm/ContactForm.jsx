@@ -68,7 +68,7 @@ function ContactForm() {
           value={number}
           onChange={hendleChange}
           required
-          placeholder="Enter your number of telephone"
+          placeholder="Enter your number of phone"
         />
       </LabelInputs>
       <AddContact type="submit">add contact</AddContact>

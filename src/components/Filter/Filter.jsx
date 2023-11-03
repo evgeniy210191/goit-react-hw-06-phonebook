@@ -2,9 +2,16 @@ import {
   Form,
   LabelInputs,
 } from 'components/StyleComponents/StyleFormsComponent.styled';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { filtered } from 'redux/reducer';
+import { slectFilter } from 'redux/selectors';
 
-function Filter({ id, hendleChange, value }) {
+function Filter() {
+  const dispatch = useDispatch();
+  const filter = useSelector(slectFilter);
+  const hendleChange = event => {
+    dispatch(filtered(event.target.value));
+  };
   return (
     <Form>
       <LabelInputs>
@@ -12,8 +19,7 @@ function Filter({ id, hendleChange, value }) {
         <input
           type="text"
           name="filter"
-          value={value}
-          id={id}
+          value={filter}
           onChange={hendleChange}
           required
           placeholder="Search"
@@ -24,8 +30,3 @@ function Filter({ id, hendleChange, value }) {
 }
 
 export default Filter;
-
-Filter.propTypes = {
-  hendleChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-};

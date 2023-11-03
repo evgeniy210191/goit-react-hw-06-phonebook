@@ -1,20 +1,36 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewContact } from 'redux/reducer';
+import { nanoid } from '@reduxjs/toolkit';
 import {
   Form,
   LabelInputs,
 } from 'components/StyleComponents/StyleFormsComponent.styled';
 import { AddContact } from 'components/StyleComponents/StyleButton.styled';
+import { slectContacts } from 'redux/selectors';
 
-function ContactForm({ onSubmitContact }) {
+function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const contacts = useSelector(slectContacts);
+  const dispatch = useDispatch();
+
   const onSubmit = event => {
     event.preventDefault();
-    onSubmitContact({ name, number });
+    const { name, number } = event.target.elements;
+    if (contacts.find(namePhonsbooks => namePhonsbooks.name === name.value)) {
+      alert('Sory, your phonebook have same name yet');
+      return;
+    }
+    const newContact = {
+      id: nanoid(),
+      name: name.value,
+      number: number.value,
+    };
     setName('');
     setNumber('');
+    return dispatch(addNewContact(newContact));
   };
 
   const hendleChange = event => {
@@ -61,7 +77,3 @@ function ContactForm({ onSubmitContact }) {
 }
 
 export default ContactForm;
-
-ContactForm.propTypes = {
-  onSubmitContact: PropTypes.func.isRequired,
-};

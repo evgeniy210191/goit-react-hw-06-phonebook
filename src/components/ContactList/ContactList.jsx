@@ -1,11 +1,27 @@
-import PropTypes from 'prop-types';
 import { Contacts } from './ContactList.styled';
 import Contact from 'components/Contact/Contact';
+import { deleteontact } from 'redux/reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { slectContacts, slectFilter } from 'redux/selectors';
 
-function ContactForm({ contacts, deleteContact }) {
+function ContactForm() {
+  const contacts = useSelector(slectContacts);
+  const filter = useSelector(slectFilter);
+  const dispatch = useDispatch();
+  const deleteContact = contactsId => {
+    return dispatch(deleteontact(contactsId));
+  };
+
+  const filterContactsByName = () => {
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  const filteredContacts = filterContactsByName();
   return (
     <Contacts>
-      {contacts.map(({ id, name, number }) => {
+      {filteredContacts.map(({ id, name, number }) => {
         return (
           <Contact
             key={id}
@@ -21,14 +37,3 @@ function ContactForm({ contacts, deleteContact }) {
 }
 
 export default ContactForm;
-
-ContactForm.propTypes = {
-  deleteContact: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};

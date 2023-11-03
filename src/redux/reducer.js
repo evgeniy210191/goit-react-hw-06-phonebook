@@ -1,8 +1,7 @@
-import { combineReducers } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { initialStates } from './initialState';
 
-const contactSlise = createSlice({
+export const contactSlise = createSlice({
   name: 'contacts',
   initialState: initialStates.contacts,
   reducers: {
@@ -15,7 +14,7 @@ const contactSlise = createSlice({
   },
 });
 
-const filterSlice = createSlice({
+export const filterSlice = createSlice({
   name: 'filter',
   initialState: initialStates.filter,
   reducers: {
@@ -25,13 +24,10 @@ const filterSlice = createSlice({
   },
 });
 
-const contactsReducer = contactSlise.reducer;
-const filterReducer = filterSlice.reducer;
-
-export const reducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
-});
+// export const reducer = combineReducers({
+//   contacts: contactSlise.reducer,
+//   filter: filterSlice.reducer,
+// });
 
 export const { addNewContact, deleteontact } = contactSlise.actions;
 export const { filtered } = filterSlice.actions;

@@ -24,10 +24,5 @@ export const filterSlice = createSlice({
   },
 });
 
-// export const reducer = combineReducers({
-//   contacts: contactSlise.reducer,
-//   filter: filterSlice.reducer,
-// });
-
 export const { addNewContact, deleteontact } = contactSlise.actions;
 export const { filtered } = filterSlice.actions;

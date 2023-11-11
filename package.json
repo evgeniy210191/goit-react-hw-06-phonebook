@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-06-phonebook",
+  "name": "phonebook-redux",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://evgeniy210191.github.io/goit-react-hw-06-phonebook/",
+  "homepage": "https://evgeniy210191.github.io/phonebook-redux/",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.7",
